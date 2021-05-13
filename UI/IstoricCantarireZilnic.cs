@@ -75,13 +75,13 @@ namespace GBTapp_CantareMici.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //Raport form = new Raport();
-            //form.datastart = dateTimePickerStart.Value.ToString("yyyyMMdd");
-            //form.datasfarsit = dateTimePickerEnd.Value.ToString("yyyyMMdd");
-            //form.TopMost = true;
-            //form.Show();
-            //this.Hide();
-           
+            RaportForm form = new RaportForm();
+            form.datastart = dateTimePickerStart.Value.ToString("yyyyMMdd");
+            form.datasfarsit = dateTimePickerEnd.Value.ToString("yyyyMMdd");
+            form.TopMost = true;
+            form.Show();
+            this.Hide();
+
         }
         public static int raportId;
         public string textBoxNRAuto;
