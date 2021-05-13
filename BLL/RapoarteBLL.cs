@@ -14,6 +14,9 @@ namespace GBTapp_CantareMici.BLL
         public string Cod_furnizor { get; set; }
         public float Greutate_NET { get; set; }
         public int Numar_bon { get; set; }
-        
+        public DateTime DataTimpI { get; set; }
+
+
+
     }
 }

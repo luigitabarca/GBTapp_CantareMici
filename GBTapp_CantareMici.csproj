@@ -47,14 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\BonuriBLL.cs" />
     <Compile Include="BLL\ClientiBLL.cs" />
     <Compile Include="BLL\FurnizoriBLL.cs" />
+    <Compile Include="BLL\MetrologieBLL.cs" />
+    <Compile Include="BLL\PortBLL.cs" />
     <Compile Include="BLL\ProduseBLL.cs" />
     <Compile Include="BLL\RapoarteBLL.cs" />
+    <Compile Include="BLL\SocietateBLL.cs" />
+    <Compile Include="DAL\BonuriDAL.cs" />
     <Compile Include="DAL\ClientiDAL.cs" />
     <Compile Include="DAL\FurnizoriDAL.cs" />
+    <Compile Include="DAL\MetrologieDAL.cs" />
+    <Compile Include="DAL\PortDAL.cs" />
     <Compile Include="DAL\ProduseDAL.cs" />
     <Compile Include="DAL\RapoarteDAL.cs" />
+    <Compile Include="DAL\SocietateDAL.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +72,42 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="UI\Bonform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Bonform.Designer.cs" />
+    <Compile Include="UI\Clienti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Clienti.Designer.cs" />
+    <Compile Include="UI\DateFCPA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\DateFCPA.Designer.cs" />
+    <Compile Include="UI\Furnizori.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Furnizori.Designer.cs" />
+    <Compile Include="UI\InfoMetrologic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\InfoMetrologic.Designer.cs" />
+    <Compile Include="UI\InfoSocietate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\InfoSocietate.Designer.cs" />
+    <Compile Include="UI\IstoricCantarireZilnic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\IstoricCantarireZilnic.Designer.cs" />
+    <Compile Include="UI\Produse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Produse.Designer.cs" />
+    <Compile Include="UI\SerialPort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SerialPort.Designer.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -77,6 +121,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Bonform.resx" />
+    <EmbeddedResource Include="UI\Clienti.resx" />
+    <EmbeddedResource Include="UI\DateFCPA.resx" />
+    <EmbeddedResource Include="UI\Furnizori.resx" />
+    <EmbeddedResource Include="UI\InfoMetrologic.resx" />
+    <EmbeddedResource Include="UI\InfoSocietate.resx" />
+    <EmbeddedResource Include="UI\IstoricCantarireZilnic.resx" />
+    <EmbeddedResource Include="UI\Produse.resx" />
+    <EmbeddedResource Include="UI\SerialPort.resx" />
     <None Include=".editorconfig" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -123,6 +176,13 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-search-client-96.png" />
+    <None Include="Resources\icons8-supplier-96.png" />
+    <None Include="Resources\icons8-flour-96.png" />
+    <Content Include="Resources\icons8-info-popup-96.png" />
+    <None Include="Resources\icons8-info-popup-961.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

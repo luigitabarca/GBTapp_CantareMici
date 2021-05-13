@@ -65,7 +65,7 @@ namespace GBTapp_CantareMici.DAL
             try
             {
                 //sql Query
-                string sql = "INSERT INTO Rapoarte ( ID_produs, ID_client, ID_furnizor, Greutate_NET, Numar_bon) VALUES ( @ID_produs, @ID_client, @ID_furnizor, @Greutate_NET,  @Numar_bon, )";
+                string sql = "INSERT INTO Rapoarte ( ID_produs, ID_client, ID_furnizor, Greutate_NET, Numar_bon, DataTimpI) VALUES ( @ID_produs, @ID_client, @ID_furnizor, @Greutate_NET,  @Numar_bon, @DataTimpI )";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -76,7 +76,7 @@ namespace GBTapp_CantareMici.DAL
                 cmd.Parameters.AddWithValue("@ID_furnizor", r.Cod_furnizor);
                 cmd.Parameters.AddWithValue("@Greutate_NET", r.Greutate_NET);
                 cmd.Parameters.AddWithValue("@Numar_bon", r.Numar_bon);
-               
+                cmd.Parameters.AddWithValue("@DataTimpI", r.DataTimpI);
 
                 //open conection
                 conn.Open();
@@ -167,7 +167,7 @@ namespace GBTapp_CantareMici.DAL
         try
         {
             //sql Query
-            string sql = "SELECT * FROM Rapoarte WHERE DataTimpO BETWEEN '" + dataInceput + "'AND '" + dataSfarsit + "'";
+            string sql = "SELECT * FROM Rapoarte WHERE DataTimpI BETWEEN '" + dataInceput + "'AND '" + dataSfarsit + "'";
 
             //sql comand
             SqlCommand cmd = new SqlCommand(sql, conn);

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace GBTapp_CantareMici.DAL
 {
-    class ClientiDAL
+    class PortDAL
     {
        
 
@@ -26,7 +26,7 @@ namespace GBTapp_CantareMici.DAL
             try
             {
                 //sql Query
-                string sql = "SELECT * FROM Clienti";
+                string sql = "SELECT * FROM Porturi";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql,conn);
@@ -61,24 +61,30 @@ namespace GBTapp_CantareMici.DAL
 
         #region Insert
 
-        public bool Insert(ClientiBLL c, SqlConnection conn)
+        public bool Insert(PortBLL p, SqlConnection conn)
         {
             //set bool var
             bool isSuccess = false;
+
+
           
             try
             {
                 //sql Query
-                string sql = "INSERT INTO Clienti( Nume, Adresa, Cod_fiscal) VALUES ( @Nume, @Adresa, @Cod_fiscal)";
+                string sql = "INSERT INTO Porturi(Port, Baudrate, Parity, Databits, Stopbits) VALUES (@Port, @Baudrate, @Parity, @Databits, @Stopbits)";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 //param to get value
-                cmd.Parameters.AddWithValue("@Nume", c.Nume);
-                cmd.Parameters.AddWithValue("@Adresa", c.Adresa);
-                cmd.Parameters.AddWithValue("@Cod_fiscal", c.Cod_fiscal);
+                cmd.Parameters.AddWithValue("@Port", p.Port);
+                cmd.Parameters.AddWithValue("@Baudrate", p.Baudrate);
+                cmd.Parameters.AddWithValue("@Parity", p.Parity);
+                cmd.Parameters.AddWithValue("@Stopbits", p.Stopbits);
+                cmd.Parameters.AddWithValue("@Databits", p.Databits);
+
                 
+
                 //open conection
                 conn.Open();
 
@@ -112,9 +118,9 @@ namespace GBTapp_CantareMici.DAL
             return isSuccess;
         }
         #endregion
-        
-        #region Update data in DB
-        public bool Update(ClientiBLL c, SqlConnection conn)
+
+        #region Update datain DB
+        public bool Update(PortBLL p, SqlConnection conn)
         {
             //set bool var
             bool isSuccess = false;
@@ -123,17 +129,20 @@ namespace GBTapp_CantareMici.DAL
             try
             {
                 //sql Query
-                string sql = "UPDATE Clienti SET  Nume=@Nume, Adresa=@Adresa, Cod_fiscal=@Cod_fiscal WHERE ID_client=@ID_client ";
+                string sql = "UPDATE Porturi SET  Baudrate=@Baudrate, Parity=@Parity, Stopbits=@Stopbits, Databits=@Databits WHERE Port=@Port ";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 //param to get value
-                cmd.Parameters.AddWithValue("@ID_client", c.ID_client);
-                cmd.Parameters.AddWithValue("@Nume", c.Nume);
-                cmd.Parameters.AddWithValue("@Adresa", c.Adresa);
-                cmd.Parameters.AddWithValue("@Cod_fiscal", c.Cod_fiscal);
-                
+                cmd.Parameters.AddWithValue("@Port", p.Port);
+                cmd.Parameters.AddWithValue("@Baudrate", p.Baudrate);
+                cmd.Parameters.AddWithValue("@Parity", p.Parity);
+                cmd.Parameters.AddWithValue("@Stopbits", p.Stopbits);
+                cmd.Parameters.AddWithValue("@Databits", p.Databits);
+
+
+
                 //open conection
                 conn.Open();
 
@@ -143,11 +152,13 @@ namespace GBTapp_CantareMici.DAL
                 if (rows > 0)
                 {
                     isSuccess = true;
+
                 }
                 else
                 {
                     isSuccess = false;
                 }
+
             }
             catch (Exception ex)
             {
@@ -159,6 +170,8 @@ namespace GBTapp_CantareMici.DAL
             {
                 conn.Close();
             }
+
+
 
             return isSuccess;
         }
@@ -166,7 +179,7 @@ namespace GBTapp_CantareMici.DAL
         #endregion
 
         #region Delete
-        public bool Delete(ClientiBLL c, SqlConnection conn)
+        public bool Delete(PortBLL b, SqlConnection conn)
         {
 
             //set bool var
@@ -177,14 +190,14 @@ namespace GBTapp_CantareMici.DAL
             try
             {
                 //sql Query
-                string sql = "DELETE FROM Clienti WHERE ID_client=@ID_client ";
+                string sql = "DELETE FROM Porturi  ";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 //param to get value
-                cmd.Parameters.AddWithValue("@ID_client", c.ID_client);
-
+               
+              
 
 
 
@@ -222,6 +235,5 @@ namespace GBTapp_CantareMici.DAL
         }
 
         #endregion
-    
     }
 }

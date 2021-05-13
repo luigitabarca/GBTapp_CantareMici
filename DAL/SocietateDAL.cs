@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace GBTapp_CantareMici.DAL
 {
-    class ClientiDAL
+    class SocietateDAL
     {
        
 
@@ -26,7 +26,7 @@ namespace GBTapp_CantareMici.DAL
             try
             {
                 //sql Query
-                string sql = "SELECT * FROM Clienti";
+                string sql = "SELECT * FROM Societati";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql,conn);
@@ -56,29 +56,91 @@ namespace GBTapp_CantareMici.DAL
 
             return dt;
         }
-        
+
         #endregion
 
-        #region Insert
+        #region Count
 
-        public bool Insert(ClientiBLL c, SqlConnection conn)
+        public bool Count(SqlConnection conn)
         {
-            //set bool var
+
             bool isSuccess = false;
+
           
             try
             {
                 //sql Query
-                string sql = "INSERT INTO Clienti( Nume, Adresa, Cod_fiscal) VALUES ( @Nume, @Adresa, @Cod_fiscal)";
+                string sql = "SELECT count(*) FROM Societati";
+
+                //sql comand
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                //sql adapter
+                conn.Open();
+                int a = (Int32) cmd.ExecuteScalar();
+
+              
+               
+
+                //transfer data from adapter to table
+
+                if (a == 0)
+                {
+                    isSuccess = false;
+                }
+                else
+                {
+                    isSuccess = true;
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                //eror
+                MessageBox.Show(ex.Message);
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+           
+            return isSuccess;
+        }
+
+        #endregion
+
+
+        #region Insert
+
+        public bool Insert(SocietateBLL s, SqlConnection conn)
+        {
+            //set bool var
+            bool isSuccess = false;
+
+
+          
+            try
+            {
+                //sql Query
+                string sql = "INSERT INTO Societati(Punct_lucru, Societate, Adresa, Cod_fiscal, Cont, Banca, NrRegCom) VALUES (@Punct_lucru, @Societate, @Adresa, @Cod_fiscal, @Cont, @Banca, @NrRegCom)";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 //param to get value
-                cmd.Parameters.AddWithValue("@Nume", c.Nume);
-                cmd.Parameters.AddWithValue("@Adresa", c.Adresa);
-                cmd.Parameters.AddWithValue("@Cod_fiscal", c.Cod_fiscal);
-                
+                cmd.Parameters.AddWithValue("@Punct_lucru", s.Punct_lucru);
+                cmd.Parameters.AddWithValue("@Societate", s.Societate);
+                cmd.Parameters.AddWithValue("@Adresa", s.Adresa);
+                cmd.Parameters.AddWithValue("@Cod_fiscal", s.Cod_fiscal);
+                cmd.Parameters.AddWithValue("@Cont", s.Cont);
+                cmd.Parameters.AddWithValue("@Banca", s.Banca);
+                cmd.Parameters.AddWithValue("@NrRegCom", s.NrRegCom);
+
+
+
                 //open conection
                 conn.Open();
 
@@ -112,9 +174,9 @@ namespace GBTapp_CantareMici.DAL
             return isSuccess;
         }
         #endregion
-        
-        #region Update data in DB
-        public bool Update(ClientiBLL c, SqlConnection conn)
+       
+        #region Update datain DB
+        public bool Update(SocietateBLL s, SqlConnection conn)
         {
             //set bool var
             bool isSuccess = false;
@@ -123,17 +185,22 @@ namespace GBTapp_CantareMici.DAL
             try
             {
                 //sql Query
-                string sql = "UPDATE Clienti SET  Nume=@Nume, Adresa=@Adresa, Cod_fiscal=@Cod_fiscal WHERE ID_client=@ID_client ";
+                string sql = "UPDATE Societati SET Punct_lucru=@Punct_lucru,  Adresa=@Adresa, Cod_fiscal=@Cod_fiscal, Cont=@Cont, Banca=@Banca, NrRegCom=@NrRegCom WHERE Societate=@Societate ";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 //param to get value
-                cmd.Parameters.AddWithValue("@ID_client", c.ID_client);
-                cmd.Parameters.AddWithValue("@Nume", c.Nume);
-                cmd.Parameters.AddWithValue("@Adresa", c.Adresa);
-                cmd.Parameters.AddWithValue("@Cod_fiscal", c.Cod_fiscal);
-                
+                cmd.Parameters.AddWithValue("@Punct_lucru", s.Punct_lucru);
+                cmd.Parameters.AddWithValue("@Societate", s.Societate);
+                cmd.Parameters.AddWithValue("@Adresa", s.Adresa);
+                cmd.Parameters.AddWithValue("@Cod_fiscal", s.Cod_fiscal);
+                cmd.Parameters.AddWithValue("@Cont", s.Cont);
+                cmd.Parameters.AddWithValue("@Banca", s.Banca);
+                cmd.Parameters.AddWithValue("@NrRegCom", s.NrRegCom);
+
+
+
                 //open conection
                 conn.Open();
 
@@ -143,11 +210,13 @@ namespace GBTapp_CantareMici.DAL
                 if (rows > 0)
                 {
                     isSuccess = true;
+
                 }
                 else
                 {
                     isSuccess = false;
                 }
+
             }
             catch (Exception ex)
             {
@@ -159,6 +228,8 @@ namespace GBTapp_CantareMici.DAL
             {
                 conn.Close();
             }
+
+
 
             return isSuccess;
         }
@@ -166,7 +237,7 @@ namespace GBTapp_CantareMici.DAL
         #endregion
 
         #region Delete
-        public bool Delete(ClientiBLL c, SqlConnection conn)
+        public bool Delete(SocietateBLL a, SqlConnection conn)
         {
 
             //set bool var
@@ -177,14 +248,14 @@ namespace GBTapp_CantareMici.DAL
             try
             {
                 //sql Query
-                string sql = "DELETE FROM Clienti WHERE ID_client=@ID_client ";
+                string sql = "DELETE FROM Societati  ";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 //param to get value
-                cmd.Parameters.AddWithValue("@ID_client", c.ID_client);
-
+               
+              
 
 
 
@@ -222,6 +293,6 @@ namespace GBTapp_CantareMici.DAL
         }
 
         #endregion
-    
+   
     }
 }

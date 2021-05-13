@@ -11,22 +11,21 @@ using System.Windows.Forms;
 
 namespace GBTapp_CantareMici.DAL
 {
-    class ClientiDAL
+    class MetrologieDAL
     {
-       
+        
 
         #region Select
-        
         public DataTable Select(SqlConnection conn)
         {
-            
+           
 
             DataTable dt = new DataTable();
 
             try
             {
                 //sql Query
-                string sql = "SELECT * FROM Clienti";
+                string sql = "SELECT * FROM Metrologie";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql,conn);
@@ -56,84 +55,31 @@ namespace GBTapp_CantareMici.DAL
 
             return dt;
         }
-        
         #endregion
 
         #region Insert
-
-        public bool Insert(ClientiBLL c, SqlConnection conn)
+        public bool Insert(MetrologieBLL b, SqlConnection conn)
         {
-            //set bool var
             bool isSuccess = false;
-          
+            
             try
             {
                 //sql Query
-                string sql = "INSERT INTO Clienti( Nume, Adresa, Cod_fiscal) VALUES ( @Nume, @Adresa, @Cod_fiscal)";
+                string sql = "INSERT INTO Metrologie (NrCantar, Serie_indicator, Buletin_metrologic, Clasa_precizie, Tip_cantarire, Tip_cantar) VALUES (@NrCantar, @Serie_indicator, @Buletin_metrologic, @Clasa_precizie, @Tip_cantarire, @Tip_cantar)";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 //param to get value
-                cmd.Parameters.AddWithValue("@Nume", c.Nume);
-                cmd.Parameters.AddWithValue("@Adresa", c.Adresa);
-                cmd.Parameters.AddWithValue("@Cod_fiscal", c.Cod_fiscal);
-                
-                //open conection
-                conn.Open();
-
-                //var to hold value after quer executed
-                int rows = cmd.ExecuteNonQuery();
-
-                if(rows>0)
-                {
-                    isSuccess = true;
-
-                }
-                else
-                {
-                    isSuccess = false;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                //eror
-                MessageBox.Show(ex.Message);
-
-            }
-            finally
-            {
-                conn.Close();
-            }
+                cmd.Parameters.AddWithValue("@NrCantar", b.NrCantar);
+                cmd.Parameters.AddWithValue("@Serie_indicator", b.Serie_indicator);
+                cmd.Parameters.AddWithValue("@Buletin_metrologic", b.Buletin_metrologic);
+                cmd.Parameters.AddWithValue("@Clasa_precizie", b.Clasa_precizie);
+                cmd.Parameters.AddWithValue("@Tip_cantarire", b.Tip_cantarire);
+                cmd.Parameters.AddWithValue("@Tip_cantar", b.Tip_cantar);
 
 
 
-            return isSuccess;
-        }
-        #endregion
-        
-        #region Update data in DB
-        public bool Update(ClientiBLL c, SqlConnection conn)
-        {
-            //set bool var
-            bool isSuccess = false;
-
-
-            try
-            {
-                //sql Query
-                string sql = "UPDATE Clienti SET  Nume=@Nume, Adresa=@Adresa, Cod_fiscal=@Cod_fiscal WHERE ID_client=@ID_client ";
-
-                //sql comand
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
-                //param to get value
-                cmd.Parameters.AddWithValue("@ID_client", c.ID_client);
-                cmd.Parameters.AddWithValue("@Nume", c.Nume);
-                cmd.Parameters.AddWithValue("@Adresa", c.Adresa);
-                cmd.Parameters.AddWithValue("@Cod_fiscal", c.Cod_fiscal);
-                
                 //open conection
                 conn.Open();
 
@@ -143,11 +89,75 @@ namespace GBTapp_CantareMici.DAL
                 if (rows > 0)
                 {
                     isSuccess = true;
+
                 }
                 else
                 {
                     isSuccess = false;
                 }
+
+            }
+            catch(Exception ex)
+            {
+                //eror
+                MessageBox.Show(ex.Message);
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        
+
+            return isSuccess;
+        }
+
+        #endregion
+
+
+
+
+        /*
+        #region UpdateRaport
+        public bool Update(MetrologieBLL b, SqlConnection conn,int Id_raport)
+        {
+            bool isSuccess = false;
+
+            try
+            {
+                //sql Query
+                string sql = "UPDATE Metrologie SET NR_inmatriculare=@NR_inmatriculare, Cod_produs=@Cod_produs, Cod_client=@Cod_client, Cod_furnizor=@Cod_furnizor, Greutate_IN=@Greutate_IN, Greutate_OUT=@Greutate_OUT WHERE ID_raport= '" + Id_raport + "'";
+
+                //sql comand
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                //param to get value
+                cmd.Parameters.AddWithValue("@NR_inmatriculare", r.NR_inmatriculare);
+                cmd.Parameters.AddWithValue("@Cod_produs", r.Cod_produs);
+                cmd.Parameters.AddWithValue("@Cod_client", r.Cod_client);
+                cmd.Parameters.AddWithValue("@Cod_furnizor", r.Cod_furnizor);
+                cmd.Parameters.AddWithValue("@Greutate_IN", r.Greutate_IN);
+                cmd.Parameters.AddWithValue("@Greutate_OUT", r.Greutate_OUT);
+               
+
+
+
+                //open conection
+                conn.Open();
+
+                //var to hold value after quer executed
+                int rows = cmd.ExecuteNonQuery();
+
+                if (rows > 0)
+                {
+                    isSuccess = true;
+
+                }
+                else
+                {
+                    isSuccess = false;
+                }
+
             }
             catch (Exception ex)
             {
@@ -160,13 +170,15 @@ namespace GBTapp_CantareMici.DAL
                 conn.Close();
             }
 
+
             return isSuccess;
         }
 
         #endregion
+    */
 
         #region Delete
-        public bool Delete(ClientiBLL c, SqlConnection conn)
+        public bool Delete(MetrologieBLL a, SqlConnection conn)
         {
 
             //set bool var
@@ -177,13 +189,13 @@ namespace GBTapp_CantareMici.DAL
             try
             {
                 //sql Query
-                string sql = "DELETE FROM Clienti WHERE ID_client=@ID_client ";
+                string sql = "DELETE FROM Metrologie  ";
 
                 //sql comand
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 //param to get value
-                cmd.Parameters.AddWithValue("@ID_client", c.ID_client);
+
 
 
 
@@ -222,6 +234,7 @@ namespace GBTapp_CantareMici.DAL
         }
 
         #endregion
-    
+
+
     }
 }

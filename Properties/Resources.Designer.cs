@@ -93,6 +93,26 @@ namespace GBTapp_CantareMici.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_flour_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-flour-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_info_popup_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-info-popup-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_new_property_96 {
             get {
                 object obj = ResourceManager.GetObject("icons8-new-property-96", resourceCulture);
@@ -126,6 +146,26 @@ namespace GBTapp_CantareMici.Properties {
         internal static System.Drawing.Bitmap icons8_rs_232_male_96 {
             get {
                 object obj = ResourceManager.GetObject("icons8-rs-232-male-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_search_client_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-search-client-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_supplier_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-supplier-96", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

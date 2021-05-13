@@ -129,6 +129,7 @@
             this.button_primulBon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.button_primulBon.TabIndex = 6;
             this.button_primulBon.TabStop = false;
+            this.button_primulBon.Click += new System.EventHandler(this.button_primulBon_Click);
             // 
             // button_metrologie
             // 
@@ -139,6 +140,7 @@
             this.button_metrologie.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.button_metrologie.TabIndex = 5;
             this.button_metrologie.TabStop = false;
+            this.button_metrologie.Click += new System.EventHandler(this.button_metrologie_Click);
             // 
             // button_port
             // 
@@ -149,6 +151,7 @@
             this.button_port.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.button_port.TabIndex = 4;
             this.button_port.TabStop = false;
+            this.button_port.Click += new System.EventHandler(this.button_port_Click);
             // 
             // button_societate
             // 
@@ -159,6 +162,7 @@
             this.button_societate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.button_societate.TabIndex = 3;
             this.button_societate.TabStop = false;
+            this.button_societate.Click += new System.EventHandler(this.button_societate_Click);
             // 
             // button_liste
             // 
@@ -169,6 +173,7 @@
             this.button_liste.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.button_liste.TabIndex = 2;
             this.button_liste.TabStop = false;
+            this.button_liste.Click += new System.EventHandler(this.button_liste_Click);
             // 
             // button_istoric
             // 
@@ -179,6 +184,7 @@
             this.button_istoric.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.button_istoric.TabIndex = 1;
             this.button_istoric.TabStop = false;
+            this.button_istoric.Click += new System.EventHandler(this.button_istoric_Click);
             // 
             // button_refresh
             // 
@@ -189,6 +195,7 @@
             this.button_refresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.button_refresh.TabIndex = 0;
             this.button_refresh.TabStop = false;
+            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
             // 
             // panel2
             // 
@@ -369,6 +376,8 @@
             // 
             // textBoxClient
             // 
+            this.textBoxClient.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.textBoxClient.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBoxClient.Location = new System.Drawing.Point(8, 47);
             this.textBoxClient.Name = "textBoxClient";
             this.textBoxClient.Size = new System.Drawing.Size(256, 20);
@@ -468,6 +477,8 @@
             // 
             // textBoxTipProdus
             // 
+            this.textBoxTipProdus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.textBoxTipProdus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBoxTipProdus.Location = new System.Drawing.Point(8, 46);
             this.textBoxTipProdus.Name = "textBoxTipProdus";
             this.textBoxTipProdus.Size = new System.Drawing.Size(113, 20);
