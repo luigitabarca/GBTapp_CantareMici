@@ -1,6 +1,7 @@
 ﻿using GBTapp_CantareMici.DAL;
 using GBTapp_CantareMici.BLL;
 using GBTapp_CantareMici.UI;
+using GBTapp_CantareMici.FCN;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,6 +35,9 @@ namespace GBTapp_CantareMici
         RapoarteDAL rdal = new RapoarteDAL();
         BonuriBLL b = new BonuriBLL();
         BonuriDAL bdal = new BonuriDAL();
+        PortBLL por = new PortBLL();
+        PortDAL pordal = new PortDAL();
+        PdfFile file = new PdfFile();
 
         public Form1()
         {
@@ -49,8 +53,49 @@ namespace GBTapp_CantareMici
                 .ToArray());
         }
 
+        public void ConectarePorturi()
+        {
+            DataTable dt1;
+            dt1 = pordal.Select(con);
+            if (dt1.Rows.Count > 0)
+            {
+                string port_1 = dt1.Rows[0].ItemArray[0].ToString();
+                string baudrate_1 = dt1.Rows[0].ItemArray[1].ToString();
+                string parity1 = dt1.Rows[0].ItemArray[2].ToString();
+                string databits1 = dt1.Rows[0].ItemArray[3].ToString();
+                string stopbits1 = dt1.Rows[0].ItemArray[4].ToString();
+                //stabilire conexiune
+                String port = port_1;
+                int baudrate = Convert.ToInt32(baudrate_1);
+                Parity parity = (Parity)Enum.Parse(typeof(Parity), parity1);
+                int databits = Convert.ToInt32(databits1);
+                StopBits stopbits = (StopBits)Enum.Parse(typeof(StopBits), stopbits1);
 
+                serialport_connect(port, baudrate, parity, databits, stopbits);
+            }
+        }
 
+        public void ParseTextBox()
+        {
+            file.DenumireFurnizor = textBoxFurnizor.Text;
+            file.CifFurnizor = textBoxCifF.Text;
+            file.AdresaFurnizor = textBoxAdresaF.Text;
+            //
+            file.DenumireClient = textBoxClient.Text;
+            file.CifClient = textBoxCifC.Text;
+            file.AdresaClient = textBoxAdresaC.Text;
+            //
+            file.NaturaProdus = textBoxProdus.Text;
+            file.DenumireProdus = textBoxTipProdus.Text;
+            file.CodProdus = textBoxCodP.Text;
+            file.LotProdus = textBoxLot.Text;
+            file.DataExpirariiProdus = textBoxDataExp.Text;
+            //
+            file.GreutateBrut = textBoxGreutateBrut.Text;
+            file.GreutateTara = textBoxGreutateTara.Text;
+            file.GreutateNeta = textBoxGreutateNet.Text;
+
+        }
 
         public void serialport_connect(String port, int baudrate, Parity parity, int databits, StopBits stopbits)
         {
@@ -61,13 +106,9 @@ namespace GBTapp_CantareMici
             port, baudrate, parity, databits, stopbits);
             sport.Handshake = Handshake.RequestToSend;
 
-
-
-
             try
             {
                 sport.Open();
-
                 sport.DataReceived += new SerialDataReceivedEventHandler(sport_DataReceived);
             }
             catch (Exception ex) { MessageBox.Show("Portul selectat pentru primirea informatiei de la cantar nu este conectat, Veti putea face doar cantariri manuale", "Eroare"); }
@@ -101,6 +142,8 @@ namespace GBTapp_CantareMici
             autocompleteFurnizori();
             autocompleteClienti();
             autocompleteProduse();
+            ConectarePorturi();
+             
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -412,12 +455,15 @@ namespace GBTapp_CantareMici
             r.Cod_furnizor = textBoxCifF.Text + textBoxAdresaF.Text;
             r.Greutate_NET = float.Parse(textBoxGreutateNet.Text);
             r.DataTimpI = DateTime.Now;
-
+            file.DataTichet = (DateTime.Now).ToString();
             DataTable dt1;
             dt1 = bdal.Select(con);
             int numar0 = int.Parse(dt1.Rows[0].ItemArray[0].ToString());
             int numar_bonuri = int.Parse(dt1.Rows[0].ItemArray[1].ToString());
             r.Numar_bon = numar0 + numar_bonuri;
+            //
+            file.NrTichet= (numar0 + numar_bonuri).ToString();
+            //
             numar_bonuri++;
             b.Bonuri_printate = numar_bonuri;
             b.Primul_bon = numar0;
@@ -433,6 +479,9 @@ namespace GBTapp_CantareMici
             {
                 MessageBox.Show("Raport creat cu succes");
 
+                ParseTextBox();
+                file.IncarcaHeader();
+                file.CreazaBonPdf();
                 //de verificat cand o sa printez tichet
                 Clear();
 
